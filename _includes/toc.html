@@ -1,0 +1,25 @@
+{%- comment -%}
+  纯 Liquid 目录：从渲染后的 HTML 中提取带 id 的 h2 / h3（GitHub Pages 不支持自定义插件）。
+  用法：{% include toc.html html=content %}；标题少于 2 个时不输出。
+{%- endcomment -%}
+{%- capture toc_items -%}
+  {%- assign toc_count = 0 -%}
+  {%- assign chunks = include.html | split: '<h' -%}
+  {%- for chunk in chunks offset: 1 -%}
+    {%- assign level = chunk | slice: 0 -%}
+    {%- if level != '2' and level != '3' -%}{%- continue -%}{%- endif -%}
+    {%- assign head = chunk | split: '>' | first -%}
+    {%- unless head contains 'id="' -%}{%- continue -%}{%- endunless -%}
+    {%- assign id = head | split: 'id="' | last | split: '"' | first -%}
+    {%- assign closing = '</h' | append: level -%}
+    {%- assign text = chunk | split: closing | first | remove_first: head | remove_first: '>' | strip_html | strip -%}
+    {%- assign toc_count = toc_count | plus: 1 -%}
+    <li class="toc-h{{ level }}"><a href="#{{ id }}">{{ text }}</a></li>
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if toc_count >= 2 -%}
+<nav class="toc" aria-label="目录">
+  <p class="toc-title">目录</p>
+  <ol>{{ toc_items }}</ol>
+</nav>
+{%- endif -%}

@@ -1,0 +1,70 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="grid page-head">
+    <p class="label">Article</p>
+    <h1 class="display">{{ page.title }}</h1>
+  </header>
+
+  <div class="grid">
+    <aside class="post-aside">
+      <dl>
+        <dt>日期</dt>
+        <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time></dd>
+        {% assign chars = content | strip_html | size %}
+        <dt>阅读</dt>
+        <dd>{{ chars | divided_by: 400 | plus: 1 }} 分钟</dd>
+        {% if page.tags.size > 0 %}
+        <dt>标签</dt>
+        <dd>
+          {% for tag in page.tags %}
+            <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+          {% endfor %}
+        </dd>
+        {% endif %}
+      </dl>
+      {% unless page.toc == false %}{% include toc.html html=content %}{% endunless %}
+    </aside>
+
+    <div class="content">
+      {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+      {{ content }}
+    </div>
+  </div>
+
+  {% include comments.html %}
+
+  <nav class="grid post-nav">
+    <div class="prev">
+      {% if page.previous %}
+        <span class="label">← 上一篇</span>
+        <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+      {% endif %}
+    </div>
+    <div class="next">
+      {% if page.next %}
+        <span class="label">下一篇 →</span>
+        <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+      {% endif %}
+    </div>
+  </nav>
+</article>
+
+<script>
+  // 高亮目录中当前阅读位置对应的标题
+  (function () {
+    var links = document.querySelectorAll('.toc a');
+    if (!links.length) return;
+    var targets = Array.prototype.map.call(links, function (a) {
+      return document.getElementById(decodeURIComponent(a.hash.slice(1)));
+    });
+    function update() {
+      var active = 0;
+      targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top < 120) active = i; });
+      links.forEach(function (a, i) { a.classList.toggle('active', i === active); });
+    }
+    addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>

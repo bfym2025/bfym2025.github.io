@@ -1,0 +1,27 @@
+---
+layout: page
+title: 标签
+label: Tags
+full: true
+permalink: /tags/
+---
+{% assign tags = site.tags | sort %}
+<p class="tag-cloud">
+  {% for tag in tags %}
+    <a class="tag" href="#{{ tag[0] | slugify }}">{{ tag[0] }} <sup>{{ tag[1].size }}</sup></a>
+  {% endfor %}
+</p>
+
+{% for tag in tags %}
+<section class="group" id="{{ tag[0] | slugify }}">
+  <h2 class="group-key">{{ tag[0] }}</h2>
+  <ul class="group-list">
+    {% for post in tag[1] %}
+    <li>
+      <time>{{ post.date | date: '%Y.%m.%d' }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}

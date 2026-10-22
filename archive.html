@@ -1,0 +1,21 @@
+---
+layout: page
+title: 归档
+label: Archive
+full: true
+permalink: /archive/
+---
+{% assign years = site.posts | group_by_exp: "p", "p.date | date: '%Y'" %}
+{% for year in years %}
+<section class="group">
+  <h2 class="group-key">{{ year.name }}</h2>
+  <ul class="group-list">
+    {% for post in year.items %}
+    <li>
+      <time>{{ post.date | date: '%m.%d' }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}

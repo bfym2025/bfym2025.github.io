@@ -1,0 +1,58 @@
+# ===== 站点信息（请按需修改） =====
+title: 奔放游民
+description: 记录技术、生活与思考
+author: bfmy2025
+email: bfmy2025@qq.com
+github_username: bfmy2025
+
+# 用户主页仓库 <username>.github.io：url 填 https://<username>.github.io，baseurl 留空
+url: "https://bfmy2025.github.io"
+baseurl: ""
+
+lang: zh-CN
+timezone: Asia/Shanghai
+
+# ===== 评论（Giscus，基于 GitHub Discussions） =====
+# 到 https://giscus.app 填入仓库后，把生成的 data-repo-id / data-category-id 复制到这里；留空则不显示评论
+giscus:
+  repo: "bfmy2025/bfmy2025.github.io"
+  repo_id: ""
+  category: "Announcements"
+  category_id: ""
+  lang: zh-CN
+
+# 不使用 github-pages 默认附带的 Primer 主题，样式全部来自 assets/css/swiss.css
+theme: null
+
+# ===== 构建设置 =====
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /:year/:month/:day/:title/
+
+paginate: 10
+paginate_path: "/page/:num/"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - scripts
+  - "*.bat"

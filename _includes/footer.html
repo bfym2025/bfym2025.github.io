@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="grid">
+    <p class="footer-mark">{{ site.title }}</p>
+    <p class="footer-col">
+      © {{ site.time | date: '%Y' }}<br>{{ site.author }}
+    </p>
+    <p class="footer-col">
+      {% if site.github_username %}<a href="https://github.com/{{ site.github_username }}">GitHub</a><br>{% endif %}
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </p>
+    <p class="footer-col muted">
+      Jekyll<br>GitHub Pages
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,50 @@
+---
+layout: default
+title: 首页
+---
+<section class="grid hero">
+  <h1 class="hero-title">{{ site.title }}</h1>
+  <p class="hero-desc">{{ site.description }}</p>
+  <p class="hero-meta">
+    <span class="label">Posts</span>
+    <span class="hero-count">{{ site.posts.size }}</span>
+  </p>
+</section>
+
+<section class="index">
+  <div class="grid index-head">
+    <span class="col-no label">No.</span>
+    <span class="col-date label">日期</span>
+    <span class="col-title label">标题</span>
+    <span class="col-tags label">标签</span>
+  </div>
+  <ol class="post-list">
+    {% assign offset = paginator.page | minus: 1 | times: paginator.per_page %}
+    {% for post in paginator.posts %}
+    {% assign n = paginator.total_posts | minus: offset | minus: forloop.index0 %}
+    <li>
+      <a class="grid post-row" href="{{ post.url | relative_url }}">
+        <span class="col-no">{% if n < 10 %}0{% endif %}{{ n }}</span>
+        <span class="col-date">{{ post.date | date: '%Y.%m.%d' }}</span>
+        <span class="col-title">
+          <strong>{{ post.title }}</strong>
+          <em>{{ post.description | default: post.excerpt | strip_html | truncate: 90 }}</em>
+        </span>
+        <span class="col-tags">{{ post.tags | join: ' / ' }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+{% if paginator.total_pages > 1 %}
+<nav class="grid pagination">
+  <span class="prev">
+    {% if paginator.previous_page %}<a href="{{ paginator.previous_page_path | relative_url }}">← 较新</a>{% endif %}
+  </span>
+  <span class="label">{{ paginator.page }} / {{ paginator.total_pages }}</span>
+  <span class="next">
+    {% if paginator.next_page %}<a href="{{ paginator.next_page_path | relative_url }}">较早 →</a>{% endif %}
+  </span>
+</nav>
+{% endif %}

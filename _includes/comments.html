@@ -1,0 +1,47 @@
+{%- comment -%}
+  Giscus 评论（基于 GitHub Discussions）。在 _config.yml 的 giscus 段填好 repo / repo_id / category_id 后才会显示。
+  单篇文章关闭评论：front matter 加 comments: false
+{%- endcomment -%}
+{%- assign g = site.giscus -%}
+{%- if g.repo != "" and g.repo_id != "" and g.category_id != "" and g.repo and g.repo_id and g.category_id and page.comments != false -%}
+<section class="grid comments" id="comments">
+  <p class="label">评论</p>
+  <div class="comments-body">
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var dark = root.getAttribute('data-theme') === 'dark' ||
+          (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+        var s = document.createElement('script');
+        s.src = 'https://giscus.app/client.js';
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        var attrs = {
+          'data-repo': {{ g.repo | jsonify }},
+          'data-repo-id': {{ g.repo_id | jsonify }},
+          'data-category': {{ g.category | default: 'Announcements' | jsonify }},
+          'data-category-id': {{ g.category_id | jsonify }},
+          'data-mapping': 'pathname',
+          'data-strict': '1',
+          'data-reactions-enabled': '1',
+          'data-emit-metadata': '0',
+          'data-input-position': 'top',
+          'data-lang': {{ g.lang | default: 'zh-CN' | jsonify }},
+          'data-loading': 'lazy',
+          'data-theme': dark ? 'noborder_dark' : 'noborder_light'
+        };
+        for (var k in attrs) s.setAttribute(k, attrs[k]);
+        document.currentScript.parentNode.appendChild(s);
+
+        // 切换亮/暗主题时同步评论区主题
+        new MutationObserver(function () {
+          var frame = document.querySelector('iframe.giscus-frame');
+          if (!frame) return;
+          var theme = root.getAttribute('data-theme') === 'dark' ? 'noborder_dark' : 'noborder_light';
+          frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+        }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+      })();
+    </script>
+  </div>
+</section>
+{%- endif -%}

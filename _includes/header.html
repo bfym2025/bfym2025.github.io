@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="grid header-inner">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="site-nav">
+      {% assign path = page.url %}
+      <a href="{{ '/' | relative_url }}"{% if path == '/' or path contains '/page/' %} class="active"{% endif %}>首页</a>
+      <a href="{{ '/archive/' | relative_url }}"{% if path == '/archive/' %} class="active"{% endif %}>归档</a>
+      <a href="{{ '/tags/' | relative_url }}"{% if path == '/tags/' %} class="active"{% endif %}>标签</a>
+      <a href="{{ '/about/' | relative_url }}"{% if path == '/about/' %} class="active"{% endif %}>关于</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="切换主题" title="切换主题"></button>
+    </nav>
+  </div>
+</header>
