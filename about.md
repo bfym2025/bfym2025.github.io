@@ -16,5 +16,5 @@ permalink: /about/
 
 ## 联系
 
-- Email：[bfmy2025@qq.com](mailto:bfmy2025@qq.com)
+- Email：[bfym2025@qq.com](mailto:bfym2025@qq.com)
 - GitHub：[bfym2025](https://github.com/bfym2025)
