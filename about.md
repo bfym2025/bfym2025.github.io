@@ -5,7 +5,7 @@ label: About
 permalink: /about/
 ---
 
-你好，我是 **bfmy2025**。
+你好，我是 **bfym2025**。
 
 这个博客用来记录技术笔记、读书心得和生活随想。
 
@@ -17,4 +17,4 @@ permalink: /about/
 ## 联系
 
 - Email：[bfmy2025@qq.com](mailto:bfmy2025@qq.com)
-- GitHub：[bfmy2025](https://github.com/bfmy2025)
+- GitHub：[bfym2025](https://github.com/bfym2025)
