@@ -255,7 +255,15 @@ main { min-height: 70vh; }
 .content .task-list { padding-left: 0; }
 .content .task-list-item { list-style: none; }
 .content .task-list-item input { accent-color: var(--accent); margin-right: .5em; }
-.content img { display: block; max-width: 100%; height: auto; }
+/* 正文图片统一限宽限高，避免竖图/方图占满整屏；保持左对齐贴住网格 */
+.content img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 640px);
+  max-height: 640px;
+  margin: 1.8em 0;
+}
 .content hr { border: 0; border-top: 2px solid var(--rule); margin: 3em 0; }
 
 .content blockquote {
