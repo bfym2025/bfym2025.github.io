@@ -12,6 +12,10 @@ baseurl: ""
 lang: zh-CN
 timezone: Asia/Shanghai
 
+# ===== Google Analytics（GA4）=====
+# 填入 GA4 衡量 ID（形如 G-XXXXXXXXXX）；留空则不加载统计脚本
+google_analytics: G-NV7T8GT5YN
+
 # ===== 评论（Giscus，基于 GitHub Discussions） =====
 # 到 https://giscus.app 填入仓库后，把生成的 data-repo-id / data-category-id 复制到这里；留空则不显示评论
 giscus:
