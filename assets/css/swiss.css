@@ -260,8 +260,8 @@ main { min-height: 70vh; }
   display: block;
   width: auto;
   height: auto;
-  max-width: min(100%, 640px);
-  max-height: 640px;
+  max-width: min(100%, 820px);
+  max-height: 1000px;
   margin: 1.8em 0;
 }
 .content hr { border: 0; border-top: 2px solid var(--rule); margin: 3em 0; }
